@@ -1,2 +1,2 @@
 # johnnysenpai.github.io
-A Website describing me as a person and my friends.
+A Website describing me and my friends.
