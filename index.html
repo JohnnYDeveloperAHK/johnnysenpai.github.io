@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f0f0f0; }
+        .header { text-align: center; }
+        .header img { width: 100%; max-width: 1200px; }
+        .content { padding: 20px; text-align: center; }
+        .profile { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
+        .profile img { width: 100%; height: auto; border-radius: 10px; }
+        .profile-item { width: 200px; }
+        .profile-item p { margin-top: 5px; font-weight: bold; }
+        .slider-container { background-color: yellow; padding: 20px; text-align: center; position: relative; overflow: hidden; }
+        .slider { display: flex; transition: transform 0.5s ease-in-out; }
+        .slide { min-width: 100%; }
+        .slide img { width: 100%; }
+        .navigation { position: absolute; top: 50%; width: 100%; display: flex; justify-content: space-between; transform: translateY(-50%); }
+        .prev, .next { background: rgba(0,0,0,0.5); color: white; padding: 10px; cursor: pointer; position: relative; }
+        .prev { left: 100px; }
+        .next { right: 100px; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="images/forwebsite.png" alt="Welcome to My Portfolio">
+    </div>
+    <div class="content">
+        <h2>Contributors</h2>
+        <div class="profile">
+            <div class="profile-item">
+                <img src="images/jeff_image.png" alt="Jeff">
+                <p>JEFF</p>
+            </div>
+            <div class="profile-item">
+                <img src="images/panterx_image.png" alt="PanterX">
+                <p>PanterX</p>
+            </div>
+            <div class="profile-item">
+                <img src="images/veljoux_image.png" alt="Veljoux">
+                <p>Veljoux</p>
+            </div>
+            <div class="profile-item">
+                <img src="images/uroshh_image.png" alt="Uroshh">
+                <p>Uroshh</p>
+            </div>
+            <div class="profile-item">
+                <img src="images/josip_image.png" alt="Josip">
+                <p>Josip</p>
+            </div>
+            <div class="profile-item">
+                <img src="images/yourmom_image.png" alt="Your Mom">
+                <p>Your Mom</p>
+            </div>
+        </div>
+    </div>
+    <div class="slider-container">
+        <div class="slider">
+            <div class="slide">
+                <img src="images/slider_image1.png" alt="Slide 1">
+            </div>
+            <div class="slide">
+                <img src="images/slider_image2.png" alt="Slide 2">
+            </div>
+            <div class="slide">
+                <img src="images/slider_image3.png" alt="Slide 3">
+            </div>
+        </div>
+        <div class="navigation">
+            <div class="prev" onclick="moveSlide(-1)">&#10094;</div>
+            <div class="next" onclick="moveSlide(1)">&#10095;</div>
+        </div>
+    </div>
+    <script>
+        let currentSlide = 0;
+        function moveSlide(n) {
+            const slides = document.querySelector('.slider');
+            const totalSlides = slides.children.length;
+            currentSlide = (currentSlide + n + totalSlides) % totalSlides;
+            slides.style.transform = 'translateX(' + (-currentSlide * 100) + '%)';
+        }
+
+        // Automatic sliding every 60 seconds
+        setInterval(() => {
+            moveSlide(1);
+        }, 60000);
+    </script>
+</body>
+</html>
