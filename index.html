@@ -77,9 +77,10 @@
             padding: 20px;
             background-color: rgba(0, 0, 0, 0.7);
             color: white;
-            position: relative;
+            position: fixed; /* Changed from relative to fixed */
             bottom: 0;
             width: 100%;
+            z-index: 1000; /* Ensures it stays above other content */
         }
 
         .contact-info {
