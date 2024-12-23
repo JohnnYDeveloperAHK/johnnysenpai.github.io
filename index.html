@@ -2,242 +2,335 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nikola Glavinić Stanić - Steam-Inspired Portfolio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400;700&display=swap" rel="stylesheet">
+    <title>JohnnY Developer - AutoHotkey Programmer</title>
+    <!-- Adding Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Space+Grotesk:wght@300;400;600&family=Plus+Jakarta+Sans:wght@400;600&display=swap" rel="stylesheet">
     <style>
-        body, html {
-            margin: 0;
-            padding: 0;
-            font-family: 'Titillium Web', sans-serif;
-            background-color: #1b2838;
-            color: #c7d5e0;
-            overflow-x: hidden;
+        :root {
+            --primary: #1a1a1a;
+            --secondary: #2d2d2d;
+            --accent: #333333;
+            --text-light: #ffffff;
+            --text-dark: #1a1a1a;
+            --glass-bg: rgba(0, 0, 0, 0.2);
+            --card-bg: rgba(255, 255, 255, 0.08);
         }
 
-        .parallax-bg {
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--primary);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        /* Previous background animations remain the same */
+        .background-animation {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('images/johnnypng.png');
-            background-size: cover;
-            background-position: center;
-            z-index: -2;
-            opacity: 0.1;
+            z-index: -1;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(41, 98, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(255, 41, 112, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(128, 41, 255, 0.1) 0%, transparent 50%);
+            animation: gradientMove 20s ease infinite;
         }
 
-        .stars, .floating-lights {
-            display: none;
+        /* Previous animations remain the same */
+        .grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -1;
+            transform-origin: center;
+            animation: gridMove 15s linear infinite;
         }
 
-        header {
+        /* Previous keyframes remain the same */
+        @keyframes gradientMove {
+            0% { background-position: 0% 0%; }
+            50% { background-position: 100% 100%; }
+            100% { background-position: 0% 0%; }
+        }
+
+        @keyframes gridMove {
+            0% { transform: perspective(500px) rotateX(60deg) translateY(0); }
+            100% { transform: perspective(500px) rotateX(60deg) translateY(50px); }
+        }
+
+        nav {
+            background: var(--glass-bg);
+            padding: 1rem;
             position: fixed;
             width: 100%;
-            background: linear-gradient(to right, #1b2838, #2a475e);
-            padding: 15px;
-            text-align: center;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        header a {
-            color: #66c0f4;
-            text-decoration: none;
-            margin: 0 15px;
-            font-weight: bold;
-            transition: color 0.3s ease;
-        }
-
-        header a:hover {
-            color: #c7d5e0;
-        }
-
-        section {
-            min-height: 100vh;
+        nav ul {
             display: flex;
             justify-content: center;
-            align-items: center;
-            padding: 100px 20px;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            font-family: 'Space Grotesk', sans-serif;
+            letter-spacing: 0.5px;
+        }
+
+        nav a:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
         }
 
         .container {
-            max-width: 800px;
-            background: linear-gradient(135deg, #2a475e, #1b2838);
-            padding: 40px;
+            max-width: 1200px;
+            margin: 6rem auto 2rem;
+            padding: 0 2rem;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 4rem 0;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            animation: fadeIn 1s ease-out;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            background: var(--glass-bg);
+            padding: 1.5rem;
             border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            transform: translateY(50px);
-            opacity: 0;
-            transition: all 0.5s ease;
-        }
-
-        .container.active {
-            transform: translateY(0);
-            opacity: 1;
-        }
-
-        h1, h2 {
-            font-weight: bold;
-            margin-bottom: 20px;
-            color: #66c0f4;
-            text-shadow: 0 0 10px rgba(102, 192, 244, 0.5);
-        }
-
-        p {
-            line-height: 1.6;
-            font-size: 18px;
-            margin-bottom: 20px;
-        }
-
-        .btn {
             display: inline-block;
-            padding: 12px 24px;
-            margin: 10px;
-            color: #ffffff;
-            background: linear-gradient(to right, #66c0f4, #1b2838);
-            border: none;
-            cursor: pointer;
-            text-decoration: none;
-            font-weight: bold;
-            border-radius: 3px;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-light);
+            letter-spacing: -1px;
         }
 
-        .btn:hover {
-            background: linear-gradient(to right, #1b2838, #66c0f4);
-            transform: translateY(-3px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        .hero p {
+            font-size: 1.4rem;
+            max-width: 600px;
+            margin: 1rem auto;
+            background: var(--glass-bg);
+            padding: 1rem;
+            border-radius: 10px;
+            display: inline-block;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-light);
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 300;
+        }
+
+        .profile-section {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            background: var(--glass-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .profile-section h2 {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            color: var(--text-light);
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+
+        .profile-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 2rem 0;
+        }
+
+        .project-card {
+            background: var(--glass-bg);
+            border-radius: 15px;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .project-card h3 {
+            margin-bottom: 1rem;
+            color: var(--text-light);
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+            font-size: 1.5rem;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-light);
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s;
+            margin-top: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 500;
+        }
+
+        .button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
         }
 
         footer {
             text-align: center;
-            padding: 20px;
-            background: linear-gradient(to right, #1b2838, #2a475e);
-            color: #66c0f4;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            z-index: 1000;
-            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
+            padding: 2rem;
+            margin-top: 4rem;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-family: 'Plus Jakarta Sans', sans-serif;
         }
 
-        .contact-info {
-            margin: 20px 0;
-        }
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
 
-        .contact-info a {
-            color: #66c0f4;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .contact-info a:hover {
-            color: #c7d5e0;
+            .profile-section {
+                text-align: center;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="parallax-bg"></div>
+    <div class="background-animation"></div>
+    <div class="grid"></div>
+    <div class="floating-elements">
+        <script>
+            for(let i = 0; i < 10; i++) {
+                const cube = document.createElement('div');
+                cube.className = 'cube';
+                cube.style.left = Math.random() * 100 + 'vw';
+                cube.style.top = Math.random() * 100 + 'vh';
+                cube.style.animationDelay = Math.random() * 2 + 's';
+                document.querySelector('.floating-elements').appendChild(cube);
+            }
+        </script>
+    </div>
 
-    <header>
-        <a href="#about">About Me</a>
-        <a href="#childhood">Childhood</a>
-        <a href="#friends">Friends</a>
-        <a href="#hobbies">Hobbies</a>
-        <a href="#games">Games</a>
-        <a href="#contact">Contact</a>
-        <a href="#tea">Green Tea</a>
-    </header>
+    <nav>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
 
-    <section id="about">
-        <div class="container">
-            <h1>Nikola Glavinić Stanić</h1>
-            <p>Hey there! I'm Nikola. I've been playing FPS games since I was a kid—13 years now, mainly on Counter-Strike. I also have ADHD, so my perfomance varies on day to day basis :PP</p>
-        </div>
-    </section>
-
-    <section id="childhood">
-        <div class="container">
-            <h2>Childhood</h2>
-            <p>Most of my childhood was spent with my cousin Bane. He's been my rock through some pretty tough times at home. Without him, I honestly don't know where I'd be today.</p>
-        </div>
-    </section>
-
-    <section id="friends">
-        <div class="container">
-            <h2>Friends</h2>
-            <p>When it comes to friends, a lot of them don't talk much anymore, My cousin still does but the other have probably gone their separate ways. But I'm always meeting new people, so I'm sure I'll find more great friends along the way. :P</p>
-        </div>
-    </section>
-
-    <section id="hobbies">
-        <div class="container">
-            <h2>Hobbies</h2>
-            <p>When it comes to hobbies, gaming tops the list. But I also like to sometimes try programming, especially with AutoHotkey. It's not a widely known language, but it's great for automating tasks on Windows. I even made a game called "Flappy Bird but Bad"—you can find it if you look it up!</p>
-        </div>
-    </section>
-
-    <section id="games">
-        <div class="container">
-            <h2>Games</h2>
-            <p>I'm really into competitive games like Dark and Darker and Overwatch 2. I might get back into Counter-Strike 2, but the game's not in the best shape right now (as of 27.08.2024). We'll see!</p>
-        </div>
-    </section>
-
-    <section id="contact">
-        <div class="container">
-            <h2>Contact Me</h2>
-            <p>If you'd like to connect or play a game with me, feel free to reach out!</p>
-            <div class="contact-info">
-                <p>Email: <a href="mailto:nikolaglavinic2003@gmail.com">nikolaglavinic2003@gmail.com</a></p>
-                <p>Steam: <a href="https://steamcommunity.com/id/JohnnyDev1925" target="_blank">JohnnyDev1925</a></p>
+    <div class="container">
+        <section id="home" class="hero">
+            <h1>JohnnY Developer</h1>
+            <p>Self-taught AutoHotkey Programmer since 2022</p>
+            
+            <div class="profile-section">
+                <img src="images/profile.jpg" alt="Profile Picture" class="profile-image">
+                <div>
+                    <h2>My Social Links</h2>
+                    <div class="social-links">
+                        <a href="https://steamcommunity.com/id/JohnnyDev1925/" class="button">Steam Profile</a>
+                        <a href="https://github.com/JohnnYDeveloperAHK" class="button">GitHub</a>
+                        <a href="https://johnny-dev.itch.io/" class="button">itch.io (Coming Soon)</a>
+                    </div>
+                    <p style="margin-top: 1rem;">Note: My itch.io page is new and doesn't have any published games yet, but I May come back and actually make one using Unity.</p>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="tea">
-        <div class="container">
-            <h2>Green Tea</h2>
-            <p>Looks like you wanna hear about Green Tea? Well, I also enjoy drinking green tea. it's just a nice way to relax while gaming :3</p>
-        </div>
-    </section>
+        <section id="projects" class="projects">
+            <div class="project-card">
+                <h3>Flappy Bird but Bad</h3>
+                <p>A unique take on the classic Flappy Bird game, developed entirely in AutoHotkey v1. Made by me ( with a bit of help for the Gravity of the bird using ChatGPT), as a challenge to see what i could make within a few weeks, It was a challenge but i DID it.</p>
+                <a href="https://www.autohotkey.com/boards/viewtopic.php?t=117234" class="button">View Project</a>
+            </div>
+
+            <div class="project-card">
+                <h3>SysInfoLogger</h3>
+                <p>A powerful system information logging tool created with AutoHotkey. an open-source tool designed for use in a virtual machine (VM) environment to simulate the information that malicious software might extract from your system..</p>
+                <a href="https://github.com/JohnnYDeveloperAHK/SysInfoLogger" class="button">View Project</a>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="project-card">
+                <h3>Get in Touch</h3>
+                <p>If youre interested in collaborating or learning Autohotkey v1 with me, or maybe have a project in mind that I could help with, Feel free to reach out through my GitHub profile, AutoHotkey forums, or my Steam Profile.</p>
+            </div>
+        </section>
+    </div>
 
     <footer>
-        <p>&copy; 2024 Nikola Glavinić Stanić. All rights reserved.</p>
+        <p>&copy; 2024 JohnnY Developer. All rights reserved.</p>
     </footer>
-
-    <script>
-        // Intersection Observer for fade-in effect
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                } else {
-                    entry.target.classList.remove('active');
-                }
-            });
-        }, { threshold: 0.1 });
-
-        document.querySelectorAll('.container').forEach(container => {
-            observer.observe(container);
-        });
-
-        // Smooth scrolling for navigation
-        document.querySelectorAll('header a').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href').substring(1);
-                const targetElement = document.getElementById(targetId);
-                window.scrollTo({
-                    top: targetElement.offsetTop - 80,
-                    behavior: 'smooth'
-                });
-            });
-        });
-    </script>
 </body>
 </html>
